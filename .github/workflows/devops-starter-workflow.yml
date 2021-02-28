@@ -30,20 +30,7 @@ jobs:
       run: |
         pip install -r Application/requirements.txt
 
-    - name: Pytest
-      continue-on-error: false
-      run: |
-        mkdir testresults
-        pip install pytest && pytest Tests/ --junitxml=./testresults/test-results.xml && pip install pycmd && py.cleanup Tests/
-
-    # Uploading unit test results to artifact store
-    - name: Upload unit test results to Artifact
-      continue-on-error: false
-      uses: actions/upload-artifact@v2
-      with:
-        name: UnitTestResults
-        path: ./testresults/test-results.xml
-
+   
     - name: Building web app
       uses: azure/appservice-build@v2-beta
       with:
